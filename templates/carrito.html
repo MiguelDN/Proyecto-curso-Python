@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+{% if current_user.is_authenticated()%}
+<div class="container">
+    <br>
+    <h4><b><u>Carrito de la compra</u></b></h4>
+    <br>
+    <div>
+        <br>
+        {% if total>0 %}
+        <div class="list-group mx-auto">
+            <table class="table table-bordered mx-auto" bgcolor="#D5E1E3 ">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Proveedor</th>
+                    <th>Eliminar</th>
+                </tr>
+                {% for art in articulos %}
+                <tr>
+                    <td>{{art.0.nombre}}</td>
+                    <td>{{art.1}}</td>
+                    <td>{{art.0.precio_final()}}</td>
+                    <td>{{art.0.precio_final()*art.1}}</td>
+                    <td>{{art.0.proveedor.nombre}}</td>
+                    <td><a href="{{url_for('compra.carrito_delete',id=art.0.id)}}"><span
+                            class="glyphicon glyphicon-trash"
+                    ></span> Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <h3 style="background:#D5E1E3">Total: {{total}} €</h3>
+            <a class="btn btn-primary" href="{{url_for('compra.pedido')}}" role="button">Comprar</a>
+        </div>
+        {% else %}
+        <h3>No hay artículos en el carrito</h3>
+        {% endif %}
+    </div>
+</div>
+{%endif%}
+{% endblock %}

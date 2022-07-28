@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+{% if current_user.is_admin()%}
+<div class="container">
+    <div class="col-md-6 mx-auto">
+        {% if not perfil %}
+        <h3>Registro de usuario</h3>
+        {% else %}
+        <h3>Perfil de {{current_user.username}}</h3>
+        {% endif %}
+        {% for field, errors in form.errors.items() %}
+        <div class="alert alert-danger">
+            {{ form[field].label }}: {{ ', '.join(errors) }}
+        </div>
+        {% endfor %}
+        <form class="form-horizontal" method="post">
+            <div class="form-group">
+                {{ form.csrf_token }}
+                {{form.username.label() }}{{form.username(size="100",class="form-control")}}<br/>
+                <div class="form-group">
+                    {{form.usuProveedorId.label() }}{{form.usuProveedorId(class="form-control")}}<br/>
+                </div>
+                <div class="form-group">
+                    {% if not perfil %}
+                    {{form.password.label() }}{{form.password(size="100",class="form-control")}}<br/>
+                    {% else %}
+                    <a href="/changepassword/{{current_user.username}}">Cambiar contraseña</a><br/>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.nombre.label() }}{{form.nombre(size="100",class="form-control")}}<br/>
+                </div>
+                <div class="form-group">
+                    {{form.email.label() }}{{form.email(size="100",class="form-control")}}<br/>
+                </div>
+                {{form.submit(class="btn btn-sm btn-primary btn-block")}}
+            </div>
+        </form>
+        <br/>
+    </div>
+</div>
+{%endif%}
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+{% if current_user.is_admin() or current_user.is_proveedor()%}
+<br>
+<h3>Gestión de Usuarios</h3>
+<div xmlns="http://www.w3.org/1999/html">
+    <a href="/gestion_usuarios/1" class="btn btn-primary btn-sm active" role="button"
+       aria-pressed="true">Clientes</a>
+    <a href="/gestion_usuarios/2" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Proveedores</a>
+</div>
+<div>
+    <br>
+    {% if seleccion ==0%}
+    <a>SELECCIONE UNA OPCION</a>
+    {% endif%}
+</div>
+{% if id == 0 %}
+<div>
+    {% if seleccion =="1" %}
+    <br>
+    <h3>Gestion de Usuarios Clientes</h3>
+    <div class="panel panel-default col-auto mx-auto div2">
+        <table class="table table-bordered tablas" bgcolor="#D5E1E3 ">
+            <tr>
+                <td class="header"><b><u>Username</u></b></td>
+                <td class="header"><b><u>Nombre</u></b></td>
+                <td class="header"><b><u>Email</u></b></td>
+                <td class="header"><b><u>Activo</u></b></td>
+                <td class="header"><b><u></u></b></td>
+            </tr>
+            <tr>
+                {% for u in usuarios %}
+                {% if u.id !=1%}
+                <td>{{u.username}}</td>
+                <td>{{u.nombre}}</td>
+                <td>{{u.email}}</td>
+                {% if u.activo==True %}
+                <td>Activo</td>
+                <td><a href="{{url_for('users.usuarios_delete',id=u.id)}}">Desactivar</a></td>
+                {% else%}
+                <td>Inactivo</td>
+                <td><a href="{{url_for('users.usuarios_activar',id=u.id)}}">Activar</a></td>
+                {% endif%}
+                {% endif%}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif%}
+    {%endif%}
+</div>
+{% if id!=0%}
+<div class="panel panel-default col-auto mx-auto div2">
+    <table class="table table-bordered tablas" bgcolor="#D5E1E3 ">
+        <tr>
+            <td class="header"><b><u>Username</u></b></td>
+            <td class="header"><b><u>Nombre</u></b></td>
+            <td class="header"><b><u>Email</u></b></td>
+            <td class="header"><b><u>Activo</u></b></td>
+            <td class="header"><b><u></u></b></td>
+        </tr>
+        <tr>
+            {% for u in usuario %}
+            <td>{{u.username}}</td>
+            <td>{{u.nombre}}</td>
+            <td>{{u.email}}</td>
+            {% if u.activo==True %}
+            <td>Activo</td>
+            <td><a href="{{url_for('users.usuarios_delete',id=u.id)}}">Desactivar</a></td>
+            {% else%}
+            <td>Inactivo</td>
+            <td><a href="{{url_for('users.usuarios_activar',id=u.id)}}">Activar</a></td>
+            {% endif%}
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{url_for('graphics.grafica_ventas_clientes')}}" class="btn btn-primary btn-sm active" role="button"
+       aria-pressed="true">
+        Volver gráfica clientes</a>
+</div>
+{% endif %}
+<div>
+    {% if seleccion =="2" %}
+    <h4>Gestion de Usuarios Proveedores</h4>
+    <br>
+    <div class="panel panel-default col-auto center mx-auto div2">
+        <table class="table table-bordered tablas" bgcolor="#D5E1E3 ">
+            <tr>
+                <td class="header"><b><u>Username</u></b></td>
+                <td class="header"><b><u>Nombre</u></b></td>
+                <td class="header"><b><u>Email</u></b></td>
+                <td class="header"><b><u>Activo</u></b></td>
+                <td class="header"><b><u></u></b></td>
+            </tr>
+            <tr>
+                {% for pro in proveedores %}
+                <td>{{pro.username}}</td>
+                <td>{{pro.nombre}}</td>
+                <td>{{pro.email}}</td>
+                {% if pro.activo==True %}
+                <td>Activo</td>
+                <td><a href="{{url_for('users.usuarios_delete',id=pro.id)}}">Desactivar</a></td>
+                {% else%}
+                <td>Inactivo</td>
+                <td><a href="{{url_for('users.usuarios_activar',id=pro.id)}}">Activar</a></td>
+                {% endif%}
+            </tr>
+            {% endfor %}
+        </table>
+        <a class="btn btn-primary btn-sm active" href="{{url_for('users.registro_proveedor')}}"
+       role="button">Registro Usuario Proveedor</a>
+    </div>
+    {% endif%}
+
+</div>
+{%endif%}
+{% endblock %}

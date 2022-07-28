@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+{% if current_user.is_authenticated%}
+<div class="container">
+    <br>
+    <div>
+        <h3>Gracias por comprar en ManzanaresZon</h3>
+        <br>
+        <h2>Tienes que pagar: {{total}} €</h2>
+        <br>
+        <a class="btn btn-primary" href="{{('/')}}" role="button">Finalizar</a>
+    </div>
+</div>
+{%endif%}
+{% endblock %}

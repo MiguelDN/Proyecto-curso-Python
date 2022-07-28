@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{{nombre}}{% endblock %}
+{% block content %}
+<br>
+<h4>Historial</h4>
+<br>
+<div class="panel panel-default col-auto center mx-auto div2">
+<table class="table table-bordered tablas" bgcolor="#D5E1E3 ">
+    <tr>
+        <td class="header">Identificador Compra</td>
+        <td class="header">Producto</td>
+        <td class="header">Proveedor</td>
+        <td class="header">Cantidad</td>
+        <td class="header">Total</td>
+    </tr>
+    <tr>
+        {% for com in lista %}
+        <td>{{com.id}}</td>
+        <td>{{com.producto}}</td>
+        <td>{{com.proveedor}}</td>
+        <td>{{com.cantidad}}</td>
+        <td>{{com.total}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock%}

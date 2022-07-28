@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon: Graph{% endblock %}
+{% block content %}
+<div>
+
+    <div>
+        <h4><b>Ventas Totales = {{ventas_totales}}€</b></h4>
+    </div>
+    <div>
+        <h4><b>Beneficios Totales = {{beneficios_totales}}€</b></h4>
+    </div>
+    <div>
+        <h4><b>% = {{porcentaje}}%</b></h4>
+    </div>
+    <div class="row col-md-12 offset-md-1 my-auto">
+        <div class="col-2">
+        <table class="table table-bordered tablas" bgcolor="#D5E1E3 ">
+        <tr>
+            <td><b>Nombre</b></td>
+            <td><b>Descuento</b></td>
+        </tr>
+        <tr>
+            {%for des in descuentos_proveedores%}
+            <td>{{des.nombre}}</td>
+            <td>{{des.descuento}}</td>
+        </tr>
+            {%endfor%}
+        </table>
+            <div class="list-group">
+            <a href="/graficas" class="list-group-item" style="color:blue" role="button" aria-pressed="true">Volver</a>
+            </div>
+        </div>
+    <div>
+        <img src="{{url_for('static',filename='upload/graficos/grafica_ventas_totales.png')}}"/>
+    </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap con plantilla -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css"
+          integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK" crossorigin="anonymous">
+
+    <!--Hoja de estilo propia (main.css) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}">
+</head>
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/index">Inicio</a>
+                {% if current_user.is_authenticated and current_user.is_proveedor()%}
+                <a class="navbar-brand" href="{{url_for('providers.proveedores')}}">Proveedores</a>
+                {% endif %}
+                {% if current_user.is_authenticated and current_user.is_admin()%}
+                <a class="navbar-brand" href="{{url_for('catego.categorias')}}">Categorías</a>
+                <a class="navbar-brand" href="{{url_for('providers.proveedores')}}">Proveedores</a>
+                {% endif %}
+            </div>
+            <div>
+                {% if current_user.is_authenticated %}
+                {% if not current_user.is_admin()%}
+                {% if not current_user.is_proveedor()%}
+                <a class="navbar-brand " href="/historial"> Historial</a>
+                {%endif%}
+                {%endif%}
+                <a class="navbar-brand " href="/perfil/{{ current_user.username}}"> Perfil</a>
+                {% if not current_user.is_admin()%}
+                {% if not current_user.is_proveedor()%}
+                <a class="navbar-brand " href="/carrito"> Carrito <span class="badge">{{num_articulos}} </span></a>
+                {%endif%}
+                {%endif%}
+                <a class="navbar-brand " href="/logout">{{current_user.nombre}}(Salir)</a>
+                {% else %}
+                <a class="navbar-brand" href="/login">Login</a>
+                <a class="navbar-brand" href="/registro">Registro</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h4>Las Mejores Ofertas al Oeste Del Manzanares</h4>
+    </div>
+</header>
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% block content %}{% endblock %}
+</body>
+</html>

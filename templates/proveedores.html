@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+{% if current_user.is_admin() or current_user.is_proveedor()%}
+<br>
+<div class="container mx-auto">
+    <h4 class="display-8 text-center">Proveedores</h4>
+    {% if current_user.is_authenticated and current_user.is_admin() %}
+    <a class="btn btn-primary" href="{{url_for('providers.proveedor_nuevo')}}" role="button">Nuevo Proveedor</a>
+    <br>
+    <br>
+    {%endif%}
+    {% if current_user.is_authenticated and current_user.is_proveedor() %}
+    {% for pro in proveedores %}
+    {% if pro.id == current_user.usuProveedor.id %}
+    <a class="btn btn-primary" href="/grafica_por_proveedor/{{pro.id}}" role="button">Gráfica Ventas</a>
+    <br>
+    <br>
+    {%endif%}
+    {%endfor%}
+    {%endif%}
+    <div class="container">
+        <div class="row">
+            <div class="col-1">
+                <br/>
+            </div>
+            <div class="col-10 div2">
+                <table class="table table-bordered" bgcolor="#D5E1E3 ">
+                    {% for pro in proveedores %}
+                    {% if pro.id == current_user.usuProveedor.id %}
+                    <tr>
+                        <td>{{pro.nombre}}</td>
+                        <td><a href="{{url_for('article.articulos_nuevos', id=pro.id)}}"><span class="glyphicon
+          glyphicon-trash"></span> Nuevo Producto</a></td>
+                        <td><a href="{{url_for('providers.proveedores_productos', id=pro.id)}}"><span class="glyphicon
+          glyphicon-trash"></span> Productos</a></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    {% for pro in proveedores %}
+                    {% if current_user.is_authenticated and current_user.is_admin() %}
+                    <tr>
+                        <td>{{pro.nombre}}</td>
+                        {% if pro.activo==True %}
+                        <td>Activo</td>
+                        {% else%}
+                        <td>Inactivo</td>
+                        {% endif%}
+                        <td><a href="{{url_for('article.articulos_nuevos', id=pro.id)}}">
+                            <span class="glyphicon glyphicon-trash"></span> Nuevo Producto</a></td>
+                        <td><a href="{{url_for('providers.proveedores_productos', id=pro.id)}}">
+                            <span class="glyphicon glyphicon-trash"></span> Productos</a></td>
+                        <td><a href="{{url_for('providers.datos_proveedor',id=pro.id)}}">
+                            <span class="glyphicon glyphicon-pencil"></span> Datos</a></td>
+                        <td><a href="{{url_for('providers.proveedores_edit',id=pro.id)}}">
+                            <span class="glyphicon glyphicon-pencil"></span> Modificar</a></td>
+                        {% if pro.activo==True %}
+                        <td><a href="{{url_for('providers.proveedores_delete',id=pro.id)}}">
+                            <span class="glyphicon glyphicon-trash"></span> Desactivar</a></td>
+                        {% else%}
+                        <td>
+                            <a href="{{url_for('providers.proveedores_activar',id=pro.id)}}">
+                                <span class="glyphicon glyphicon-trash"></span> Activar</a></td>
+                        {% endif%}
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+{% endblock %}

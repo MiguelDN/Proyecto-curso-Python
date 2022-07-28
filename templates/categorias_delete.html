@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+<div class="container">
+  <br>
+  <div>
+    <h3>Borrar Categoría</h3>
+  </div>
+  <br>
+  <div>
+    <h3>¿Estás seguro de borrar la categoría: {{cat.nombre}}?</h3>
+  </div>
+  <br>
+  <div class="form-group">
+    <form class="form-horizontal" method="post">
+      {{ form.csrf_token }}
+      {{form.si(class="btn btn-primary") }} {{form.no(class="btn btn-primary")}}<br/><br/>
+    </form>
+  </div>
+</div>
+{% endblock %}

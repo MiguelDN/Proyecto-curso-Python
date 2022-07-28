@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{{nombre}}{% endblock %}
+{% block content %}
+<div class="col-md-10 offset-md-1 my-auto">
+    <div class="row contenedor row align-items-start">
+        <div ><br/>
+            <h3>Proveedores</h3>
+            <div class="list-group">
+                {% if current_user.is_admin()%}
+                {% for pro in proveedores %}
+                    {% if proveedor.nombre==pro.nombre%}
+                        <a class="list-group-item active" href="/grafica_por_proveedor/{{pro.id}}">{{pro.nombre}}</a>
+                    {% else%}
+                        <a class="list-group-item" href="/grafica_por_proveedor/{{pro.id}}">{{pro.nombre}}</a>
+                    {% endif%}
+                {% endfor %}
+                <a href="/graficas" class="list-group-item" style="color:blue" role="button"
+                   aria-pressed="true">Volver</a>
+                {%endif%}
+                {% if current_user.is_proveedor()%}{% for pro in proveedores %}
+                {% if proveedor.nombre==pro.nombre%}
+                <a class="list-group-item active">{{pro.nombre}}</a>
+                {%endif%}
+                {% endfor %}
+                <a href="/proveedores" class="list-group-item" style="color:blue" role="button"
+                   aria-pressed="true">Volver</a>
+                {%endif%}
+            </div>
+            <br/>
+
+            <br/>
+            <br/>
+        </div>
+        <div class="col-md-10"><br/>
+            <h4 class="display-8 text-center">ManzanaresZon</h4>
+            <div class="panel panel-default">
+                <div>
+                {% if seleccion == 0%}
+                <h2>SELECCIONE UN PROVEEDOR</h2>
+                {% else%}
+                </div>
+                <div>
+                <img src="{{url_for('static',filename='upload/graficos/grafica_proveedor.png')}}"/>
+                </div>
+                {% endif%}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

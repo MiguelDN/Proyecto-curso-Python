@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{{nombre}}{% endblock %}
+{% block content %}
+{% if current_user.is_admin()%}
+<div class="col-md-12 mx-auto">
+    <div><br/>
+        <h4>ALARMAS STOCK PRODUCTO</h4>
+        <div class="panel panel-default mx-auto" id="div3">
+            <table class="table table-bordered tablas col-md-12 my-auto" bgcolor="#D5E1E3 ">
+                <tr>
+                    <td class="header">Imagen</td>
+                    <td class="header">Nombre</td>
+                    <td class="header">Descripción</td>
+                    <td class="header">Categoría</td>
+                    <td class="header">Stock</td>
+                    <td class="header">PVP</td>
+                    <td class="header">Proveedor</td>
+                    <td class="header">Capacidad Stock</td>
+                    <td class="header">Ubicación</td>
+                    <td class="header">Porcentaje Stock</td>
+                    <td class="header">Modificar</td>
+                    <td class="header">Borrar</td>
+                </tr>
+                <tr>
+                    {% for art in alarmas_stock %}
+                    {% if art.image %}
+                    <td><img src="{{url_for('static',filename='upload/')}}{{art.image}}" width="100" height="100"/>
+                        {% else %}
+                    <td><img src="{{url_for('static',filename='upload/not-found.png')}}" width="100" height="100"/>
+                        {% endif %}
+                    <td>{{art.nombre}}</td>
+                    <td>{{art.descripcion}}</td>
+                    <td>{{art.categoria.nombre}}</td>
+                    <td>{{art.stock}}</td>
+                    <td>{{art.precio_final()}}</td>
+                    <td>{{art.proveedor.nombre}}</td>
+                    <td>{{art.capacidad_stock}}</td>
+                    <td>{{art.ubicacion}}</td>
+                    {% if art.porcentaje_stock()<20 %}
+                    <td style="color:red">{{art.porcentaje_stock()}}%</td>
+                    {% else%}
+                    <td>{{art.porcentaje_stock()}}%</td>
+                    {% endif%}
+                    <td><a href="{{url_for('article.articulos_edit',id=art.id)}}"><span
+                            class="glyphicon glyphicon-shopping-cart"></span>
+                        Producto</a></td>
+                    <td><a href="{{url_for('article.articulos_delete',id=art.id)}}"><span
+                            class="glyphicon glyphicon-shopping-cart"></span>
+                        Borrar</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{%endif%}
+{% endblock %}

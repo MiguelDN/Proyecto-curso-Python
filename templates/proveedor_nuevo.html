@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+{% if current_user.is_admin()%}
+<div class="container">
+    <br>
+    <div class="col-md-6 mx-auto">
+        <h4>Nuevo Proveedor</h4>
+        {% for field, errors in form.errors.items() %}
+        <div class="alert alert-danger">
+            {{ form[field].label }}: {{ ', '.join(errors) }}
+        </div>
+        {% endfor %}
+        <form class="form-horizontal" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                {{ form.csrf_token }}
+                {{form.nombre.label() }}{{form.nombre(size="100",class="form-control")}}<br/>
+            </div>
+            <div class="form-group">
+                {{form.cif.label() }}{{form.cif(size="10",class="form-control")}}<br/>
+            </div>
+            <div class="form-group">
+                {{form.descuento.label() }}{{form.descuento(size="10",class="form-control")}}<br/>
+            </div>
+            <div class="form-group">
+                {{form.direccion.label() }}{{form.direccion(size="10",class="form-control")}}<br/>
+            </div>
+            <div class="form-group">
+                {{form.telefono.label() }}{{form.telefono()}}<br/>
+            </div>
+            {{form.submit(class="btn btn-sm btn-primary btn-block")}}
+        </form>
+        <br/>
+    </div>
+</div>
+{%endif%}
+{% endblock %}

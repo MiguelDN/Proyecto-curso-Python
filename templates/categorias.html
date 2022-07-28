@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+<br>
+<h4>Categorias</h4>
+<br>
+<a class="btn btn-primary" href="{{url_for('catego.nueva_categoria')}}" role="button">Nueva categoria</a>
+<br>
+<br>
+<div class="container">
+    <div class="col-10 mx-auto div2">
+      <table class="table table-bordered" bgcolor="#D5E1E3 ">
+          <tr>
+            <th class="header">Nombre</th>
+              <th class="header"></th>
+              <th class="header"></th>
+          </tr>
+      {% for cat in categorias %}
+        <tr>
+          {% if cat.nombre!= "Todas"%}
+          <td>{{cat.nombre}}</td>
+          <td><a href="{{url_for('catego.categorias_edit',id=cat.id)}}"><span class="glyphicon glyphicon-pencil"></span> Modificar</a></td>
+          <td><a href="{{url_for('catego.categorias_delete',id=cat.id)}}"><span class="glyphicon glyphicon-trash"></span> Borrar</a></td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+      </table>
+    </div>
+  </div>
+ 	
+  
+{% endblock %}

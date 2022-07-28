@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+{% if current_user.is_admin()%}
+<div class="container">
+    <br>
+    {% if pro.activo==True%}
+    <div>
+        <h3>Desactivar Proveedor</h3>
+    </div>
+    <br>
+    <div>
+        <h3>¿Estás seguro de Desactivar: {{pro.nombre}}?</h3>
+    </div>
+    {%else%}
+    <div>
+        <h3>Activar Proveedor</h3>
+    </div>
+    <br>
+    <div>
+        <h3>¿Estás seguro de Activar: {{pro.nombre}}?</h3>
+    </div>
+    {%endif%}
+    <br>
+    <div class="form-group">
+        <form class="form-horizontal" method="post">
+            {{ form.csrf_token }}
+            {{form.si(class="btn btn-primary") }} {{form.no(class="btn btn-primary")}}<br/><br/>
+        </form>
+    </div>
+</div>
+{%endif%}
+{% endblock %}

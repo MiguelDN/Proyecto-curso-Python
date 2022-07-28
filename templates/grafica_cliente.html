@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{{nombre}}{% endblock %}
+{% block content %}
+{%if current_user.is_admin()%}
+<div class="col-md-11 offset-md-1 my-auto">
+    <div class="row contenedor row align-items-start">
+        <div ><br/>
+            <h3>Clientes</h3>
+            <div id="usuarios_grafica">
+                <table class="table table-bordered tablas" bgcolor="#D5E1E3 ">
+                    <tr>
+                        <td><b>Id</b></td>
+                        <td><b>Nombre</b></td>
+                        <td><b>Gasto</b></td>
+                    </tr>
+                    {% for compra in lista %}
+                    <tr>
+                        <td><a href="{{url_for('users.gestion_usuarios', seleccion=1, id=compra.id)}}"
+                               style="color:blue">{{compra.id}}</a></td>
+                        <td>{{compra.nombre}}</td>
+                        <td>{{compra.valor}}€</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+                <a href="/graficas" class="list-group-item" style="color:blue" role="button"
+                   aria-pressed="true">Volver</a>
+        </div>
+        <div class="col-md-8"><br/>
+            <h4 class="display-8 text-center">ManzanaresZon</h4>
+            <div class="panel panel-default">
+                <div>
+                    {% if seleccion == 0%}
+                    <h2>SELECCIONE UN PROVEEDOR</h2>
+                    {% else%}
+                </div>
+                <div>
+                    <img src="{{url_for('static',filename='upload/graficos/grafica_venta_clientes.png')}}"/>
+                </div>
+                {% endif%}
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+
+{% endblock %}

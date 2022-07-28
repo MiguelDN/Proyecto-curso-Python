@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}ManzanaresZon{% endblock %}
+{% block content %}
+<br>
+<div class="container">
+<div class="col-md-6 mx-auto my-auto">
+<h4>Datos Proveedor</h3>
+<table class="table table-secondary">
+  <tr>
+      <td class="table-secondary">Nombre</td>
+      <td class="table-secondary">{{proveedor.nombre}}</td>
+  </tr>
+    <tr>
+      <td class="table-light" style="color:black">Teléfono</td>
+        <td class="table-light " style="color:black">{{proveedor.telefono}}</td>
+  </tr>
+    <tr>
+      <td class="table-secondary">C.I.F.</td>
+        <td class="table-secondary">{{proveedor.cif}}</td>
+  </tr>
+    <tr>
+      <td class="table-light" style="color:black">Dirección</td>
+        <td class="table-light" style="color:black">{{proveedor.direccion}}</td>
+  </tr>
+    <tr>
+      <td class="table-secondary">Descuento</td>
+        <td class="table-secondary">{{proveedor.descuento}}</td>
+  </tr>
+</table>
+    <a href="/proveedores" class="list-group-item" style="color:blue" role="button" aria-pressed="true">Volver</a>
+</div>
+</div>
+
+
+{% endblock %}
