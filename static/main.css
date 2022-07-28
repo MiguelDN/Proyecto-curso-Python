@@ -1,0 +1,88 @@
+
+body{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align:center;
+  background-image:url('fotos-playa-madrid-rio-001.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-weight: bold;
+  font-size: 14px;
+
+}
+.my-fixed-item {
+    position: fixed;
+    min-height: 120px;
+    width: 252px;
+    text-align: center;
+    word-wrap: break-word;
+    background-color: aquamarine;
+}
+
+#usuarios_grafica {
+     overflow:auto;
+     height:300px;
+     width:210px;
+}
+
+#cate_ppal {
+     overflow:auto;
+     height:200px;
+     width:180px;
+}
+
+#div1 {
+     overflow:auto;
+     height:450px;
+     width:1000px;
+}
+
+.div2 {
+     overflow:auto;
+     height:300px;
+     width:1000px;
+}
+
+#div3 {
+     overflow:auto;
+     height:450px;
+     width:1150px;
+}
+
+table
+{
+vertical-align:middle
+}
+
+table td {
+ vertical-align:middle;
+ text-align:centre;
+}
+
+header
+{
+text:black
+}
+
+.contenedor {
+display:flex;
+justify-content: center;
+align-items: center;
+}
+
+header{
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  background:#D5E1E3;
+  font-weight: bold
+}
+
+.header{
+position: sticky;
+top: 0;
+z-index: 10;
+background-color: #BCDDE2;
+}
