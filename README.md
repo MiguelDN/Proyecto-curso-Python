@@ -1,6 +1,11 @@
 Proyecto fin de curso Python.
+
 Aplicacion Web de tienda de suministros.
+
 Realizada con framework flask.
+
+INICIO APP: Instalar REQUIREMENTS e iniciar con=> python main.py
+
 Requisitos:
 
 1.	Nos piden tener inventariado todos sus productos y cuáles son sus cantidades en el almacén, de tal forma, que cuando el stock esté al 90% nos avise de pedir al proveedor. 
